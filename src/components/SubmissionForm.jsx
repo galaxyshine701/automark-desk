@@ -41,7 +41,7 @@ export default function SubmissionForm({ assignment, existing, studentName, onSu
           <label>Live website link <input value={liveLink} onChange={(e) => setLiveLink(e.target.value)} placeholder="https://..." /></label>
           <label>GitHub repo link (optional) <input value={githubLink} onChange={(e) => setGithubLink(e.target.value)} placeholder="https://github.com/..." /></label>
           <label>Note <textarea value={note} onChange={(e) => setNote(e.target.value)} placeholder="What did you build?" /></label>
-          <p className="muted">No file upload in this demo. The teacher will open your links in a new tab.</p>
+          <p className="muted">No file upload in this demo. The instructor will open your links in a new tab.</p>
         </>
       )}
       <p className="muted">Submitting as: {studentName}</p>

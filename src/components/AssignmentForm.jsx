@@ -5,7 +5,7 @@ const emptyRubric = () => ({ criterion: '', marks: 5 })
 
 export default function AssignmentForm({ onCreate }) {
   const [title, setTitle] = useState('')
-  const [className, setClassName] = useState('Class 8')
+  const [className, setClassName] = useState('CS-210 Web Development')
   const [type, setType] = useState('MCQ')
   const [dueDate, setDueDate] = useState('')
   const [questions, setQuestions] = useState([emptyQuestion()])
@@ -46,11 +46,11 @@ export default function AssignmentForm({ onCreate }) {
       <h3>Create assignment</h3>
       {error && <p className="error">{error}</p>}
       <label>Title <input value={title} onChange={(e) => setTitle(e.target.value)} required /></label>
-      <label>Class <input value={className} onChange={(e) => setClassName(e.target.value)} /></label>
+      <label>Course <input value={className} onChange={(e) => setClassName(e.target.value)} /></label>
       <label>Type
         <select value={type} onChange={(e) => setType(e.target.value)}>
-          <option value="MCQ">MCQ / Fill-in</option>
-          <option value="PROJECT">Project / Website</option>
+          <option value="MCQ">Quiz (MCQ)</option>
+          <option value="PROJECT">Project</option>
         </select>
       </label>
       <label>Due date and time <input type="datetime-local" value={dueDate} onChange={(e) => setDueDate(e.target.value)} required /></label>
