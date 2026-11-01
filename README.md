@@ -1,5 +1,7 @@
 # AutoMark Desk
 
+   Live demo: https://automark-desk.vercel.app/ (data is stored per browser; there is no backend.)
+
 A coursework portal for one course. An instructor creates quizzes and projects, students submit, the app checks the work and applies a late penalty, and the instructor reviews and publishes the final result.
 
 It runs in the browser only. There is no server and no database.
