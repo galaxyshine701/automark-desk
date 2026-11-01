@@ -17,7 +17,9 @@ export default function App() {
   const [studentName, setStudentName] = useState('Demo Student')
   const [reviewId, setReviewId] = useState(null)
 
-  useEffect(() => { saveState({ assignments, submissions }) }, [assignments, submissions])
+  const [saveFailed, setSaveFailed] = useState(false)
+
+  useEffect(() => { setSaveFailed(!saveState({ assignments, submissions })) }, [assignments, submissions])
 
   function enter(role) { setView(role); setReviewId(null); setScreen('app') }
   function switchView(role) { setView(role); setReviewId(null) }
@@ -79,6 +81,9 @@ export default function App() {
 
   return (
     <>
+      {saveFailed && (
+        <div role="alert" className="error">Your changes could not be saved in this browser. Data will be lost when you close the page.</div>
+      )}
       {screen === 'app' && <AppBar view={view} onView={switchView} onHome={() => setScreen('welcome')} courseName={COURSE} />}
       <div className="shell">
         {screen === 'welcome' ? (
