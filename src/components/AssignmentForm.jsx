@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { correctAnswerIsAnOption } from '../utils/checkMCQ.js'
 
 const emptyQuestion = () => ({ text: '', options: ['', '', '', ''], correctAnswer: '', marks: 5 })
 const emptyRubric = () => ({ criterion: '', marks: 5 })
@@ -22,6 +23,11 @@ export default function AssignmentForm({ onCreate }) {
     if (type === 'MCQ') {
       const bad = questions.some((q) => !q.text.trim() || !q.correctAnswer.trim() || q.options.some((o) => !o.trim()))
       if (bad) { setError('Every MCQ question needs text, four options and a correct answer.'); return }
+      const badIndex = questions.findIndex((q) => !correctAnswerIsAnOption(q))
+      if (badIndex !== -1) {
+        setError(`Question ${badIndex + 1}: the correct answer "${questions[badIndex].correctAnswer.trim()}" does not match any of its four options. Fix it before saving.`)
+        return
+      }
     } else {
       const bad = rubric.some((r) => !r.criterion.trim() || !r.marks)
       if (bad) { setError('Every rubric row needs a criterion and marks.'); return }
