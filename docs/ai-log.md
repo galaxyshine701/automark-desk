@@ -25,11 +25,14 @@ Claude Code ran in manual mode: it asked permission before editing files, runnin
 - **The reviewer could not read the pull request.** The `pr-reviewer` sub-agent first marked the Jira-link check as FAIL because it had no GitHub tools. The main agent read the pull request itself and corrected the result, and said so in the comment. See `docs/skill.md`.
 - **The AI cannot merge with the token it has.** The merge request through GitHub MCP was refused with HTTP 403. See `docs/mcp-setup.md`.
 
-## What I decided and checked (write in my own words before submitting)
+## What I decided and checked
 
-- Suggested by the AI that I accepted, and why:
-- Suggested by the AI that I changed, and how:
-- Suggested by the AI that I rejected, and why:
-- What I reviewed line by line before merging:
-- A mistake I found in the AI's work:
-- How the `assignment-review` skill helped (consistency, time saved):
+This part was drafted with Claude (in a chat) from the record of the project, and I read it before saving it.
+
+- **How I controlled the AI.** Claude Code ran in manual mode, so every file edit, command and write to Jira or GitHub needed my approval. I told it not to merge, and I merged every pull request myself on GitHub.
+- **Suggested by the AI and accepted:** writing tests first and running them on the old code, so the bug is shown by failing tests (5 failing for AMD-2, 10 failing for AMD-3) before any fix.
+- **Suggested by the AI and changed:** the first AMD-3 tests had six wrong-shape cases in one loop. I asked for six separate tests so that each failure is visible.
+- **Left unchanged on purpose:** the `pr-reviewer` sub-agent still has a limited tool list. I documented this as a limitation in `docs/skill.md` instead of changing it on the last day.
+- **What I reviewed before merging:** the pull request description, the test result and the build result for each pull request. I did not read every line of the source code myself; the review was done mainly through the `assignment-review` skill, the tests and the build.
+- **Mistakes in the AI's work that were found and corrected:** the broken CSS in the redesign (build failed until the closing brace was added); the AMD-3 test that stopped at the first failure; the claim that the warning banner was covered by tests (it is checked by the build only); wrong statements by the agent about the state of pull requests, corrected from `git log`; and a Jira comment that said "After the merge" when the browser check was done before it (a correcting comment was added).
+- **How the `assignment-review` skill helped:** every pull request got the same 8 questions with evidence, and it ran the tests and the build each time. One review of PR #4 took about 1 minute 27 seconds. This is one observed run, not a measured comparison.
